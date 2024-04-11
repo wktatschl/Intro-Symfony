@@ -1,0 +1,11 @@
+{% block body %}
+
+	{% if form  %}
+		{{ form_start(form, {'attr':{'data-turbo':'false'}}) }}
+		{{ form_widget(form.categories)}}
+        {# c'est chiant avec turbo pour les recherches #}
+		{{ form_widget(form.query) }}
+		{{ form_end(form) }}
+	{% endif %}
+
+{% endblock %}

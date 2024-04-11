@@ -8,38 +8,27 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-
-
 class HomeController extends AbstractController
-
 {
-    public function __construct(private CategoriesRepository $categ){}
+    public function __construct(private CategoriesRepository $catRepo)
+    {
 
+    }
+    
     #[Route('/', name: 'app_home')]
     public function index(): Response
-
     {
-
-        return $this->render('home/index.html.twig', [    
-
-            'categs' => $this->categ->findAll()
-
+        $user= $this->getUser();
+        return $this->render('home/index.html.twig', [
+            'categs' => $this->catRepo->findAll(),
         ]);
-
     }
 
-    #[Route('/detail/{id}', name: 'details')]
+    #[ROUTE('/details/{id}', name:'details')]
     public function details(Categories $categ): Response
-
-    {
-        // $categ = $this->categ->findOneBy(["id"=>$id]);
-       
-        return $this->render('home/detail.html.twig', [    
-
+    {    
+        return $this->render('home/detail.html.twig', [
             'categ' => $categ
-
         ]);
-
     }
-
 }

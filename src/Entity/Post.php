@@ -151,7 +151,7 @@ class Post
         return $this->category;
     }
 
-    public function addCategories(Categories $categories): static
+    public function addCategory(Categories $categories): static
     {
         if (!$this->category->contains($categories)) {
             $this->category->add($categories);

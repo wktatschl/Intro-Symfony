@@ -20,10 +20,9 @@ class CategoriesRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Categories::class);
     }
-// Definir une méthode qui renvoie toutes les catégories pour les afficher dans base.html.twig
-    public function getCategories(){
+
+    public function getCategories()
+    {
         return $this->findAll();
     }
-
-
 }
