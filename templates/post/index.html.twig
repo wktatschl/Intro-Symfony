@@ -57,6 +57,12 @@
 						<div class='d-flex justify-content-center mt-3'>
 							{% include "components/_badge.html.twig" with { categ : post.category } only %}
 
+						{% for tag in post.tags %}
+							<button type="button" class="btn btn-info">
+								<a href="{{ path('app_tag', { id:tag.id})}}">{{ tag.title }}</div>
+								</a>
+							</button>
+						{% endfor %}
 
 						</div>
 					</div>

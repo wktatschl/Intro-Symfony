@@ -29,7 +29,7 @@ class PostRepository extends ServiceEntityRepository
         $this->searchData = $searchData;
     }
 
-    public function findPublished(int $page, $categorie = null): PaginationInterface
+    public function findPublished(int $page, $categorie = null, $tag = null): PaginationInterface
 
     {
 
@@ -42,6 +42,12 @@ class PostRepository extends ServiceEntityRepository
             $data->join('p.category', 'categ')
                 ->andWhere('categ = :categ')
                 ->setParameter('categ', $categorie);
+        }
+
+        if ($tag != null) {
+            $data->join('p.tags', 't')
+                ->andWhere('t = :tag')
+                ->setParameter('tag', $tag);
         }
 
         $query = $data

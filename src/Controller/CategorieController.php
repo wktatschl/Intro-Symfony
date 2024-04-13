@@ -15,6 +15,7 @@ class CategorieController extends AbstractController
     #[Route('/categorie/{id}', name: 'app_categorie')]
     public function index(Categories $categorie, PostRepository $postRepo, Request $request): Response
     {
+    
         $page = $request->query->getInt('page', 1);
         $posts = $postRepo->findPublished($page, $categorie);
         

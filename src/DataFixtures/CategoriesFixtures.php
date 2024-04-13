@@ -2,12 +2,13 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Faker\Factory;
+use App\Entity\Tag;
 use App\Entity\Categories;
 use App\Repository\PostRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class CategoriesFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -35,6 +36,29 @@ class CategoriesFixtures extends Fixture implements DependentFixtureInterface
             );
             }
         }
+
+
+
+        $tags = [];
+
+        for($i = 0; $i < 5; $i++){
+            $tag = new Tag();
+            $tag->setTitle($faker->sentence(2));
+            $manager->persist($tag);
+            $tags[] = $tag;
+            
+        }
+        $posts = $this->postRepo->findAll();
+
+        foreach($posts as $post){
+            for($i = 0; $i < mt_rand(1, 5); $i++){
+                $post->addTag($tags[mt_rand(0, count($tags) - 1)]
+            );
+            }
+        }
+
+
+
         $manager->flush();
     }
 
